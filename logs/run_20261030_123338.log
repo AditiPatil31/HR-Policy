@@ -1,0 +1,35 @@
+2026-10-30 12:33:39,174 | INFO | hr_assistant.pipeline | Building HR assistant...
+2026-10-30 12:33:39,182 | INFO | hr_assistant.pipeline | No vector store on disk found, building one from scratch
+2026-10-30 12:33:39,183 | INFO | hr_assistant.document_loader | LOADING DOCUMENTS from document loader: data\hr_policy.txt
+2026-10-30 12:33:39,184 | INFO | hr_assistant.document_loader | Loaded 1 docuemnt(s)
+2026-10-30 12:33:39,188 | INFO | hr_assistant.splitter | Split document(s) into 9 chunk(s)
+2026-10-30 12:33:39,191 | INFO | hr_assistant.vector_store | Embedding 9 chunk(s) and building FAISS index...
+2026-10-30 12:33:39,191 | INFO | hr_assistant.embeddings | Initializing embeddings model 'jina-embeddings-v2-base-en'
+2026-10-30 12:33:40,556 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2026-10-30 12:33:40,559 | INFO | faiss.loader | Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-30 12:33:40,560 | INFO | faiss.loader | Loading faiss.
+2026-10-30 12:33:40,643 | INFO | faiss.loader | Successfully loaded faiss.
+2026-10-30 12:33:40,667 | INFO | hr_assistant.vector_store | FAISS index built in memory
+2026-10-30 12:33:40,677 | INFO | hr_assistant.vector_store | Saved FAISS index to 'data\faiss_index'
+2026-10-30 12:33:40,680 | INFO | hr_assistant.vector_store | Creating a retriever with top_k=3
+2026-10-30 12:33:40,693 | INFO | hr_assistant.llm | Initializing LLM 'openai/gpt-oss-120b'
+2026-10-30 12:33:41,236 | INFO | hr_assistant.agent | Creating HR agent with 1 tool(s)
+2026-10-30 12:33:41,250 | INFO | hr_assistant.agent | HR agent is ready!
+2026-10-30 12:33:41,252 | INFO | hr_assistant.pipeline | HR assistant is ready to take questions
+2026-10-30 12:34:03,298 | INFO | __main__ | === Stremlit run: new question received ===
+2026-10-30 12:34:03,304 | INFO | hr_assistant.pipeline | User question: what is work from home policy?
+2026-10-30 12:34:04,227 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 12:34:04,332 | INFO | hr_assistant.tools | search_hr_policy called with query: What is the work from home policy?
+2026-10-30 12:34:11,844 | INFO | hr_assistant.tools | Found 3 matching chunk(s)
+2026-10-30 12:34:12,767 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 12:34:12,778 | INFO | hr_assistant.pipeline | Final answer: Sure thing! Here’s a quick rundown of our **Work‑From‑Home (WFH) policy**:
+
+| Aspect | Details |
+|--------|---------|
+| **Maximum days** | Employees may work from home up to **2 days per week**. |
+| **Approval** | This arrangement requires **manager approval**. |
+| **Fully remote** | If you need a fully remote setup, you must obtain **written approval from the department head**. |
+| **Core hours** | While working from home, you must be reachable during the company’s **core hours of 10 AM – 4 PM**. |
+
+If you have any specific questions—like how to request approval or what tools to use while remote—just let me know!

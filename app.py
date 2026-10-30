@@ -2,13 +2,7 @@
 
 Run with:  streamlit run app.py
 """
-from dotenv import load_dotenv
-import os
 
-load_dotenv()
-print("Tracing:", os.getenv("LANGSMITH_TRACING"))
-print("Project:", os.getenv("LANGSMITH_PROJECT"))
-print("API Key loaded:", bool(os.getenv("LANGSMITH_API_KEY")))
 import streamlit as st
 
 from hr_assistant.pipeline import ask, build_hr_assistant
