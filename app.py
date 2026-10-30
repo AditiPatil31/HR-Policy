@@ -2,10 +2,21 @@
 
 Run with:  streamlit run app.py
 """
+from dotenv import load_dotenv
+import os
 
+load_dotenv()
+print("Tracing:", os.getenv("LANGSMITH_TRACING"))
+print("Project:", os.getenv("LANGSMITH_PROJECT"))
+print("API Key loaded:", bool(os.getenv("LANGSMITH_API_KEY")))
 import streamlit as st
 
 from hr_assistant.pipeline import ask, build_hr_assistant
+
+from hr_assistant.logger import get_logger
+
+
+logger = get_logger(__name__)
 
 
 
@@ -33,6 +44,7 @@ for message in st.session_state.messages:
 question = st.chat_input("Ask a question about HR policy...")
 
 if question:
+    logger.info("=== Stremlit run: new question received ===")
     st.session_state.messages.append({"role": "user", "content": question})
     with st.chat_message("user"):
         st.markdown(question)
