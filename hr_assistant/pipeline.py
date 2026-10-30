@@ -19,16 +19,21 @@ from hr_assistant.vector_store import (
         vector_store_exists
 )
 
+from hr_assistant.logger import get_logger
+
+logger = get_logger(__name__)
 
 def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
     """Load + Split + embed the document, reusing a saved index if we have one."""
 
     if vector_store_exists(file_path):
         print("Found an existing vectore store collection, connecting to it (fast, no re-embedding).")
+        logger.info("Vector Store already exists on disk, reusing it")
         return load_vector_store()
 
     
     print("No vector store found, building one from scratch...")
+    logger.info("No vector store on disk found, building one from scratch")
 
     documents = load_document(file_path)
     chunks = split_data_into_chunks(documents)
@@ -44,6 +49,8 @@ def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
 def build_hr_assistant(file_path : str = config.DATA_FILE_PATH):
     """Build the full RAG agent,ready to answer question."""
 
+    logger.info("Building HR assistant...")
+
     config.check_api_keys()
 
     vector_store = build_vector_store_for_document(file_path)
@@ -56,14 +63,20 @@ def build_hr_assistant(file_path : str = config.DATA_FILE_PATH):
 
     agent = create_hr_agent(llm,[search_tool])
 
+    logger.info("HR assistant is ready to take questions")
+
     return agent
 
 def ask(agent, question: str) -> str:
     """Ask the agent a question and
     return its final answer as plain text."""
 
+    logger.info("User question: %s", question)
+
     response = agent.invoke({"messages": [{"role": "user", "content": question}]})
     answer = response["messages"][-1].content
+
+    logger.info("Final answer: %s", answer)
 
     return answer
 

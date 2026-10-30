@@ -1,0 +1,40 @@
+2026-10-30 11:51:09,183 | INFO | hr_assistant.pipeline | Building HR assistant...
+2026-10-30 11:51:09,183 | INFO | hr_assistant.pipeline | No vector store on disk found, building one from scratch
+2026-10-30 11:51:09,188 | INFO | hr_assistant.document_loader | Loaded 1 docuemnt(s)
+2026-10-30 11:51:09,188 | INFO | hr_assistant.splitter | Split document(s) into 9 chunk(s)
+2026-10-30 11:51:09,188 | INFO | hr_assistant.vector_store | Embedding 9 chunk(s) and building FAISS index...
+2026-10-30 11:51:09,188 | INFO | hr_assistant.embeddings | Initializing embeddings model 'jina-embeddings-v2-base-en'
+2026-10-30 11:51:10,414 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2026-10-30 11:51:10,418 | INFO | faiss.loader | Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-30 11:51:10,419 | INFO | faiss.loader | Loading faiss.
+2026-10-30 11:51:10,518 | INFO | faiss.loader | Successfully loaded faiss.
+2026-10-30 11:51:10,552 | INFO | hr_assistant.vector_store | FAISS index built in memory
+2026-10-30 11:51:10,557 | INFO | hr_assistant.vector_store | Saved FAISS index to 'data\faiss_index'
+2026-10-30 11:51:10,565 | INFO | hr_assistant.vector_store | Creating a retriever with top_k=3
+2026-10-30 11:51:10,581 | INFO | hr_assistant.llm | Initializing LLM 'openai/gpt-oss-120b'
+2026-10-30 11:51:11,136 | INFO | hr_assistant.agent | Creating HR agent with 1 tool(s)
+2026-10-30 11:51:11,152 | INFO | hr_assistant.agent | HR agent is ready!
+2026-10-30 11:51:11,153 | INFO | hr_assistant.pipeline | HR assistant is ready to take questions
+2026-10-30 11:51:26,422 | INFO | __main__ | === Stremlit run: new question received ===
+2026-10-30 11:51:26,427 | INFO | hr_assistant.pipeline | User question: what is paid leave policy?
+2026-10-30 11:51:27,300 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 11:51:27,533 | WARNING | langsmith.client | Failed to multipart ingest runs: langsmith.utils.LangSmithAuthError: Authentication failed for https://api.smith.langchain.com/runs/multipart. HTTPError('401 Client Error: Unauthorized for url: https://api.smith.langchain.com/runs/multipart', '{"error":"Unauthorized"}\n')trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6852-7240-b351-c2f5c7472c33; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-68ca-7773-a4f0-bfe7a2155f5d; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-68d1-7742-9f17-12d593e68655
+2026-10-30 11:51:27,577 | INFO | hr_assistant.tools | search_hr_policy called with query: What is the paid leave policy?
+2026-10-30 11:51:28,179 | INFO | hr_assistant.tools | Found 3 matching chunk(s)
+2026-10-30 11:51:28,517 | WARNING | langsmith.client | Failed to send compressed multipart ingest: langsmith.utils.LangSmithAuthError: Authentication failed for https://api.smith.langchain.com/runs/multipart. HTTPError('401 Client Error: Unauthorized for url: https://api.smith.langchain.com/runs/multipart', '{"error":"Unauthorized"}\n')trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-68d1-7742-9f17-12d593e68655; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-68ca-7773-a4f0-bfe7a2155f5d; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c82-7ec3-ab68-9b65fc55c630; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c96-7433-b958-8a993a44349b; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c9c-7fd0-a7e7-68338d646051
+2026-10-30 11:51:29,198 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 11:51:29,210 | INFO | hr_assistant.pipeline | Final answer: **Paid Leave Policy**
+
+- **Annual Leave**  
+  - All full‑time employees receive **20 days of paid annual leave** each calendar year.  
+  - Leave requests must be submitted through the HR portal **at least 5 working days in advance**.  
+  - Unused annual leave can be carried forward to the next year, but **no more than 5 days** may be transferred.
+
+- **Sick Leave** (separate from annual leave)  
+  - Employees are entitled to **10 paid sick days** per year.  
+  - If you are sick for **more than 2 consecutive days**, a medical certificate must be provided.
+
+If you need help submitting a leave request or have any other questions, just let me know!
+2026-10-30 11:51:29,379 | WARNING | langsmith.client | Failed to send compressed multipart ingest: langsmith.utils.LangSmithAuthError: Authentication failed for https://api.smith.langchain.com/runs/multipart. HTTPError('401 Client Error: Unauthorized for url: https://api.smith.langchain.com/runs/multipart', '{"error":"Unauthorized"}\n')trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c9c-7fd0-a7e7-68338d646051; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c96-7433-b958-8a993a44349b; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6c82-7ec3-ab68-9b65fc55c630; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6efa-7d92-850b-3c0b18bd1c51; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6efc-73b1-9891-96379c1adf8a
+2026-10-30 11:51:30,172 | WARNING | langsmith.client | Failed to send compressed multipart ingest: langsmith.utils.LangSmithAuthError: Authentication failed for https://api.smith.langchain.com/runs/multipart. HTTPError('401 Client Error: Unauthorized for url: https://api.smith.langchain.com/runs/multipart', '{"error":"Unauthorized"}\n')trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6efc-73b1-9891-96379c1adf8a; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6efa-7d92-850b-3c0b18bd1c51; trace=01a18b78-6852-7240-b351-c2f5c7472c33,id=01a18b78-6852-7240-b351-c2f5c7472c33
