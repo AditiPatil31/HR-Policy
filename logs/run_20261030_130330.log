@@ -6,3 +6,27 @@
 2026-10-30 13:03:30,835 | INFO | hr_assistant.splitter | Split document(s) into 9 chunk(s)
 2026-10-30 13:03:30,836 | INFO | hr_assistant.vector_store | Embedding 9 chunk(s) and building FAISS index...
 2026-10-30 13:03:30,837 | INFO | hr_assistant.embeddings | Initializing embeddings model 'jina-embeddings-v2-base-en'
+2026-10-30 13:03:32,240 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2026-10-30 13:03:32,241 | INFO | faiss.loader | Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-30 13:03:32,244 | INFO | faiss.loader | Loading faiss.
+2026-10-30 13:03:32,331 | INFO | faiss.loader | Successfully loaded faiss.
+2026-10-30 13:03:32,365 | INFO | hr_assistant.vector_store | FAISS index built in memory
+2026-10-30 13:03:32,372 | INFO | hr_assistant.vector_store | Saved FAISS index to 'data\faiss_index'
+2026-10-30 13:03:32,377 | INFO | hr_assistant.vector_store | Creating a retriever with top_k=3
+2026-10-30 13:03:32,391 | INFO | hr_assistant.llm | Initializing LLM 'openai/gpt-oss-120b'
+2026-10-30 13:03:32,921 | INFO | hr_assistant.agent | Creating HR agent with 1 tool(s)
+2026-10-30 13:03:32,938 | INFO | hr_assistant.agent | HR agent is ready!
+2026-10-30 13:03:32,940 | INFO | hr_assistant.pipeline | HR assistant is ready to take questions
+2026-10-30 13:03:58,078 | INFO | __main__ | === Stremlit run: new question received ===
+2026-10-30 13:03:58,083 | INFO | hr_assistant.pipeline | User question: can i take work from home for a week
+2026-10-30 13:03:59,166 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 13:03:59,248 | INFO | hr_assistant.tools | search_hr_policy called with query: work from home policy duration week
+2026-10-30 13:04:01,657 | INFO | hr_assistant.tools | Found 3 matching chunk(s)
+2026-10-30 13:04:02,431 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 13:04:02,442 | INFO | hr_assistant.pipeline | Final answer: According to the company’s **Work‑From‑Home policy**:
+
+- Employees may work from home **up to 2 days per week**, and this still requires your manager’s approval.  
+- Any arrangement that involves being fully remote (e.g., working from home for an entire week) **requires written approval from the department head** in addition to manager approval.
+
+So, under the standard policy you cannot take a full‑week (5‑day) work‑from‑home without obtaining that special written permission. If you need a week‑long remote arrangement, you should discuss it with your manager and then submit a written request to your department head for approval.

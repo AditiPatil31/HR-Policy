@@ -1,0 +1,27 @@
+2026-10-30 19:13:19,525 | INFO | hr_assistant.pipeline | Building HR assistant...
+2026-10-30 19:13:19,528 | INFO | hr_assistant.tracing | LangSmith tracing ENABLED - project 'hr_policy_assistant', traces at https://smith.langchain.com
+2026-10-30 19:13:19,538 | INFO | hr_assistant.pipeline | No vector store on disk found, building one from scratch
+2026-10-30 19:13:19,539 | INFO | hr_assistant.document_loader | LOADING DOCUMENTS from document loader: data\hr_policy.txt
+2026-10-30 19:13:19,540 | INFO | hr_assistant.document_loader | Loaded 1 docuemnt(s)
+2026-10-30 19:13:19,541 | INFO | hr_assistant.splitter | Split document(s) into 9 chunk(s)
+2026-10-30 19:13:19,541 | INFO | hr_assistant.vector_store | Embedding 9 chunk(s) and building FAISS index...
+2026-10-30 19:13:19,543 | INFO | hr_assistant.embeddings | Initializing embeddings model 'jina-embeddings-v2-base-en'
+2026-10-30 19:13:20,690 | INFO | faiss.loader | Loading faiss with AVX2 support.
+2026-10-30 19:13:20,694 | INFO | faiss.loader | Could not load library with AVX2 support due to:
+ModuleNotFoundError("No module named 'faiss.swigfaiss_avx2'")
+2026-10-30 19:13:20,695 | INFO | faiss.loader | Loading faiss.
+2026-10-30 19:13:20,716 | INFO | faiss.loader | Successfully loaded faiss.
+2026-10-30 19:13:20,723 | INFO | hr_assistant.vector_store | FAISS index built in memory
+2026-10-30 19:13:20,726 | INFO | hr_assistant.vector_store | Saved FAISS index to 'data\faiss_index'
+2026-10-30 19:13:20,729 | INFO | hr_assistant.vector_store | Creating a retriever with top_k=3
+2026-10-30 19:13:20,734 | INFO | hr_assistant.llm | Initializing LLM 'openai/gpt-oss-120b'
+2026-10-30 19:13:20,760 | INFO | hr_assistant.agent | Creating HR agent with 1 tool(s)
+2026-10-30 19:13:20,763 | INFO | hr_assistant.agent | HR agent is ready!
+2026-10-30 19:13:20,764 | INFO | hr_assistant.pipeline | HR assistant is ready to take questions
+2026-10-30 19:13:34,090 | INFO | __main__ | === Stremlit run: new question received ===
+2026-10-30 19:13:34,095 | INFO | hr_assistant.pipeline | User question: tell me salary of employees
+2026-10-30 19:13:34,848 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
+2026-10-30 19:13:34,928 | WARNING | hr_assistant.guardrails | Input guard BLOCKED question: tell me salary of employees | reason: The user is requesting salary information for employees, which is a request for personal employee data not allowed under the HR policy.
+2026-10-30 19:13:58,123 | INFO | __main__ | === Stremlit run: new question received ===
+2026-10-30 19:13:58,127 | INFO | hr_assistant.pipeline | User question: share recipe of biryani
+2026-10-30 19:13:58,454 | INFO | httpx | HTTP Request: POST https://api.groq.com/openai/v1/chat/completions "HTTP/1.1 200 OK"
