@@ -1,0 +1,7 @@
+2026-11-07 10:12:58,500 | INFO | hr_assistant.pipeline | Building HR assistant...
+2026-11-07 10:12:58,500 | INFO | hr_assistant.tracing | LangSmith tracing ENABLED - project 'hr_policy_assistant', traces at https://smith.langchain.com
+2026-11-07 10:12:59,832 | INFO | httpx | HTTP Request: GET https://1d3b0183-ba4e-4854-8950-d9d056b040b2.sa-east-1-0.aws.cloud.qdrant.io:6333 "HTTP/1.1 200 OK"
+2026-11-07 10:12:59,833 | INFO | httpx | HTTP Request: GET https://1d3b0183-ba4e-4854-8950-d9d056b040b2.sa-east-1-0.aws.cloud.qdrant.io:6333/collections/hr_policy/exists "HTTP/1.1 200 OK"
+2026-11-07 10:12:59,840 | INFO | hr_assistant.pipeline | Qdrant Cloud collection already exists , reusing it
+2026-11-07 10:12:59,841 | INFO | hr_assistant.vector_store | Connecting to qdrant cloud
+2026-11-07 10:12:59,954 | INFO | hr_assistant.embeddings | Initializing embeddings model 'jina-embeddings-v2-base-en'

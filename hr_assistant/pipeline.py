@@ -16,7 +16,6 @@ from hr_assistant.vector_store import (
         build_vector_store,
         get_retriever,
         load_vector_store,
-        save_vector_store,
         vector_store_exists
 )
 
@@ -26,17 +25,20 @@ from hr_assistant.logger import get_logger
 
 logger = get_logger(__name__)
 
-def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
-    """Load + Split + embed the document, reusing a saved index if we have one."""
+## data ingestion
 
-    if vector_store_exists(file_path):
-        print("Found an existing vectore store collection, connecting to it (fast, no re-embedding).")
-        logger.info("Vector Store already exists on disk, reusing it")
+def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
+    """Load + Split + embed the document, 
+       reusing the Qdrant cloud collection if we have one."""
+
+    if vector_store_exists():
+        print("Found an existing Qdrant Cloud collection, connecting to it (fast, no re-embedding).")
+        logger.info("Qdrant Cloud collection already exists , reusing it")
         return load_vector_store()
 
     
-    print("No vector store found, building one from scratch...")
-    logger.info("No vector store on disk found, building one from scratch")
+    print("No Qdrant Cloud collection found, building one from scratch...")
+    logger.info("No Qdrant Cloud collection found, building one from scratch")
 
     documents = load_document(file_path)
     chunks = split_data_into_chunks(documents)
@@ -44,10 +46,10 @@ def build_vector_store_for_document(file_path: str = config.DATA_FILE_PATH):
     print(f"Loaded '{file_path}' and split it into {len(chunks)} chunks.")
 
     vector_store = build_vector_store(chunks)
-    save_vector_store(vector_store)
-    print("Vector store built and saved to disk for next time.")
+    print("Vector store built and uploaded to Qdrant Cloud.")
     return vector_store
 
+## data retrieval
 
 def build_hr_assistant(file_path : str = config.DATA_FILE_PATH):
     """Build the full RAG agent,ready to answer question."""
